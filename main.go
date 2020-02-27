@@ -7,13 +7,11 @@ import(
     "log"
     "os"
 	"github.com/labstack/echo"
-	
 	"github.com/jinzhu/gorm"
   _ "github.com/jinzhu/gorm/dialects/mysql"
   _ "github.com/go-sql-driver/mysql"
 
 )
-
 
 func hello(c echo.Context) error {
     return c.String(http.StatusOK, "Hello Welcome to Our Application!")
@@ -49,9 +47,8 @@ func getData(c echo.Context) error {
  	} 
 	 log.Println("Connection Established")
 	 db.SingularTable(true)
-	dataObject := Dataset{}
+	dataObject := []Dataset{}
 	db.Find(&dataObject)
-
 	return c.JSON(http.StatusOK,dataObject)
 }
 
