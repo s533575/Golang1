@@ -16,29 +16,6 @@ import(
 func hello(c echo.Context) error {
     return c.String(http.StatusOK, "Hello Welcome to Our Application!")
 }
-
-// func getCats(c echo.Context) error {
-//     catName := c.QueryParam("name")
-//     catType := c.QueryParam("type")
-
-//     dataType := c.Param("data")
-
-//     if dataType == "string" {
-//         return c.String(http.StatusOK, fmt.Sprintf("your cat name is: %s\nand his type is: %s\n", catName, catType))
-//     }
-
-//     if dataType == "json" {
-//         return c.JSON(http.StatusOK, map[string]string{
-//             "name": catName,
-//             "type": catType,
-//         })
-//     }
-
-//     return c.JSON(http.StatusBadRequest, map[string]string{
-//         "error": "you need to lets us know if you want json or string data",
-//     })
-// }
-
 func getData(c echo.Context) error {
 	db, err := gorm.Open("mysql", "root:@tcp(127.0.0.1:3306)/goexample2?charset=utf8&parseTime=True")
 	defer db.Close()
@@ -48,7 +25,7 @@ func getData(c echo.Context) error {
 	 log.Println("Connection Established")
 	 db.SingularTable(true)
 	dataObject := []Dataset{}
-	db.Find(&dataObject)
+	db.Find(&dataObject) 
 	return c.JSON(http.StatusOK,dataObject)
 }
 
